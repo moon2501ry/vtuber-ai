@@ -9,16 +9,15 @@ class VtuberAI:
             self.client_voice = ElevenLabs(api_key=api_key);
         self.conversa = [];
 
-    def response(self, chat: list|None = None):
-        if chat is None:
-            chat = self.conversa;
+    def response(self):
         response = self.client_gpt.chat.completions.create(
             model="gpt-4o-mini",
-            messages=chat
+            messages=self.conversa
         );
+        self.conversa.append(response.choices[0].message);
         return response.choices[0].message;
 
-    def text_to_speech(self, voice_id: str, model_id: str|None = "eleven_multilingual_v2", text: str|None = 'Sou uma Inteligência Artificial'):
+    def text_to_speech(self, voice_id: str, text: str, model_id: str|None = "eleven_multilingual_v2"):
         if self.client_voice is not None:
             self.speech = self.client_voice.text_to_speech.convert(
                 voice_id=voice_id,
