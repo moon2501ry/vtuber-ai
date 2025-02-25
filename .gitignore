@@ -1,5 +1,6 @@
 __pycache__/
+private/
 s.py
 audio.mp3
-vtuber.png
+assets/
 main_developing.py
