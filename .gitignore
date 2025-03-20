@@ -1,6 +1,10 @@
+# Python cache;
 __pycache__/
+# Private archives
 private/
 s.py
+# Generated archives
 audio.mp3
+# Assets and archives in developing
 assets/
 main_developing.py

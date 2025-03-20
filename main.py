@@ -1,18 +1,16 @@
-from vtuber_ai import VtuberAI
+from assistant_ai import AssistAI
 import pygame
-from s import c # Descarte
+from s import c # Private keys
 
-vtuber = VtuberAI(c.get('API-KEY'));
-vtuber.conversa.append({"role": "system", "content": c.get('PROMPT-INITIAL')});
+vtuber = AssistAI(c.get('API-KEY'), c.get('PROMPT-INITIAL'));
 
 pygame.mixer.init();
 while True:
     _input = input("Fale: ");
     pygame.mixer.music.unload();
-    vtuber.conversa.append({"role": "user", "content": str(_input)});
-    response = vtuber.response();
+    response = vtuber.response(str(_input));
     print("Resposta:", response.content);
-    vtuber.text_to_speech(voice_id=c.get('MAN-ID'), text=response.content);
+    vtuber.text_to_speech(c.get('MAN-ID'), response.content);
     vtuber.save_audio();
     pygame.mixer.music.load('audio.mp3');
     pygame.mixer.music.play();
